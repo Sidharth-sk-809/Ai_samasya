@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import '../services/speech_service.dart';
 import '../data/story_data.dart';
+import '../services/audio_assistant.dart';
 
 class TalkingGameScreen extends StatefulWidget {
   const TalkingGameScreen({super.key});
@@ -250,6 +251,12 @@ class _TalkingGameScreenState extends State<TalkingGameScreen> {
 
   void _scheduleNextSentence() {
       if (!mounted) return;
+      
+      // Check if story is finishing
+      if (_currentSentenceIndex + 1 >= _sentences.length) {
+          AudioAssistant().storyFeedback(true);
+      }
+      
       setState(() {
           _waitingForNext = true;
       });

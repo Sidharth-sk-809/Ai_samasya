@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:image_picker/image_picker.dart';
 import '../data/story_data.dart';
+import '../services/audio_assistant.dart';
 
 class ReadabilityScreen extends StatefulWidget {
   const ReadabilityScreen({super.key});
@@ -100,10 +101,12 @@ class _ReadabilityScreenState extends State<ReadabilityScreen> {
 
   void _calculateReadability(String text) {
       if (text.isEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("No text found. Please try again.")),
+          );
           setState(() {
-              _extractedText = "No text found.";
-              _readabilityScore = 0;
-              _gradeLevel = "N/A";
+              _isAnalyzing = false;
+              // Do not set _extractedText so we stay in 'Scan' mode
           });
           return;
       }
@@ -183,6 +186,9 @@ class _ReadabilityScreenState extends State<ReadabilityScreen> {
           if (score < 30) {
               _lowScoreCount++;
           }
+          
+          // Audio Feedback
+          AudioAssistant().processHandwriting(score);
       });
   }
 
