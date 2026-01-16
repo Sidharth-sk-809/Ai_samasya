@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'talking_game_screen.dart';
 import 'readability_screen.dart';
+import 'number_quest_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -133,6 +134,55 @@ class HomeScreen extends StatelessWidget {
                                     children: const [
                                         Text("Readability Analyzer", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                                         Text("Check reading difficulty of any text", style: TextStyle(color: Colors.grey)),
+                                    ],
+                                ),
+                            ),
+                            const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 16),
+                        ],
+                    ),
+                ),
+            ),
+
+            const SizedBox(height: 30),
+
+            // Number Quest Card
+            GestureDetector(
+                onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const NumberQuestScreen()),
+                    );
+                },
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                            BoxShadow(
+                                color: Colors.green.withOpacity(0.2),
+                                blurRadius: 15,
+                                offset: const Offset(0, 5),
+                            )
+                        ],
+                    ),
+                    padding: const EdgeInsets.all(20),
+                    child: Row(
+                        children: [
+                            Container(
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                    color: Colors.green.shade50,
+                                    shape: BoxShape.circle
+                                ),
+                                child: const Icon(Icons.calculate, color: Colors.green, size: 30),
+                            ),
+                            const SizedBox(width: 20),
+                            Expanded(
+                                child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: const [
+                                        Text("Number Quest", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                                        Text("Fun math visuals! 🍎", style: TextStyle(color: Colors.grey)),
                                     ],
                                 ),
                             ),
