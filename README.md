@@ -1,4 +1,4 @@
-# app
+# ai-models
 
 A new Flutter project.
 
